@@ -1,10 +1,11 @@
 <template>
   <div id="test">
     <div v-html="title"></div>
-      <div class="block1">
-          <span class="demonstration">默认</span>
-          <img :src="src" class="img1">
-      </div>
+    <el-container>
+      <el-main>
+        <baidu-map class="map" center="北京"></baidu-map>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
@@ -43,5 +44,9 @@ a {
 .block1 img{
   width:100%;
   height:100%;
+}
+.map {
+  width: 100%;
+  height: 400px;
 }
 </style>

@@ -49,6 +49,11 @@
         <div class="block1">
           <img :src="src" class="img1">
         </div>
+        <baidu-map class="map" :center="center" :zoom="zoom" @ready="handler">
+          <bm-marker :position="center" :dragging="true" animation="BMAP_ANIMATION_BOUNCE">
+            <bm-label :content="content" :labelStyle="{color: 'red', fontSize : '24px'}" :offset="{width: -35, height: 30}"/>
+          </bm-marker>
+        </baidu-map>
       </el-main>
     </el-container>
   </div>
@@ -59,10 +64,14 @@ export default {
   name: 'houseInfo',
   data () {
     return {
+      zoom: 15,
+      center: {lng: 116.404, lat: 39.915},
       title: '<title>houseInfo</title>',
       houseId: this.$route.query.houseId,
       context: null,
       data: null,
+      content: null,
+      position: null,
       src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
     }
   },
@@ -81,6 +90,11 @@ export default {
         .catch(function (error) {
           alert(error)
         })
+    },
+    handler: function ({BMap, map}) {
+      console.log(BMap, map)
+      this.center = this.data.position
+      this.zoom = 15
     }
   },
   mounted: function () {
@@ -123,5 +137,9 @@ a {
 .block1 img{
   width: 80%;
   height: 80%;
+}
+.map {
+  width: 60%;
+  height: 60%;
 }
 </style>
